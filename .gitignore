@@ -7,3 +7,8 @@ clicks
 __pycache__
 *.pyc
 *.model
+
+# Azure deployment secrets
+.azure_deploy_vars
+*.env
+local.settings.json
