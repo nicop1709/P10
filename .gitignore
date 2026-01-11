@@ -1,5 +1,6 @@
 *.csv
 clicks
+*.pkl
 *.pickle
 
 .venv

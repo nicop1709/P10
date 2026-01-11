@@ -1,0 +1,42 @@
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "get",
+        "post"
+      ]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "$return"
+    },
+    {
+      "name": "modelBlob",
+      "type": "blob",
+      "direction": "in",
+      "path": "models/als_model.pkl",
+      "connection": "AzureWebJobsStorage"
+    },
+    {
+      "name": "metadataBlob",
+      "type": "blob",
+      "direction": "in",
+      "path": "models/metadata.pkl",
+      "connection": "AzureWebJobsStorage"
+    },
+    {
+      "name": "csrBlob",
+      "type": "blob",
+      "direction": "in",
+      "path": "models/csr_train.pkl",
+      "connection": "AzureWebJobsStorage"
+    }
+  ]
+}
+
