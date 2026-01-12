@@ -21,21 +21,24 @@
       "type": "blob",
       "direction": "in",
       "path": "models/als_model.pkl",
-      "connection": "AzureWebJobsStorage"
+      "connection": "AzureWebJobsStorage",
+      "dataType": "binary"
     },
     {
       "name": "metadataBlob",
       "type": "blob",
       "direction": "in",
       "path": "models/metadata.pkl",
-      "connection": "AzureWebJobsStorage"
+      "connection": "AzureWebJobsStorage",
+      "dataType": "binary"
     },
     {
       "name": "csrBlob",
       "type": "blob",
       "direction": "in",
       "path": "models/csr_train.pkl",
-      "connection": "AzureWebJobsStorage"
+      "connection": "AzureWebJobsStorage",
+      "dataType": "binary"
     }
   ]
 }

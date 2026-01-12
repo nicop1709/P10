@@ -1,0 +1,34 @@
+// Requête KQL pour trouver l'erreur d'une invocation spécifique
+// Remplacez INVOCATION_ID par l'ID de l'invocation qui a échoué
+
+// Exemple avec l'invocation trouvée:
+// InvocationId: 330ef09a-bfe5-4b9d-8b54-02693a9aad64
+
+traces
+| where timestamp > ago(2h)
+| where customDimensions.InvocationId == "330ef09a-bfe5-4b9d-8b54-02693a9aad64"
+   or customDimensions.prop__invocationId == "330ef09a-bfe5-4b9d-8b54-02693a9aad64"
+| order by timestamp asc
+| project timestamp, message, severityLevel, customDimensions
+
+// Alternative: Chercher toutes les erreurs de cette fonction
+traces
+| where timestamp > ago(2h)
+| where customDimensions.prop__functionName == "Functions.RecommendArticle"
+| where severityLevel >= 3
+   or message contains "Error"
+   or message contains "Exception"
+   or message contains "❌"
+   or message contains "Failed"
+| order by timestamp desc
+| take 50
+| project timestamp, message, severityLevel, customDimensions
+
+// Chercher les exceptions Python
+exceptions
+| where timestamp > ago(2h)
+| where customDimensions.InvocationId == "330ef09a-bfe5-4b9d-8b54-02693a9aad64"
+   or customDimensions.prop__invocationId == "330ef09a-bfe5-4b9d-8b54-02693a9aad64"
+| order by timestamp desc
+| project timestamp, type, message, outerMessage, details, customDimensions
+
