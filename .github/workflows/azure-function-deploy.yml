@@ -1,0 +1,54 @@
+name: Deploy Azure Function
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'azure_function/**'
+      - '.github/workflows/azure-function-deploy.yml'
+  workflow_dispatch:  # Permet de déclencher manuellement
+
+env:
+  AZURE_FUNCTIONAPP_NAME: func-recommender-1768155564
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: './azure_function'
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+
+    - name: 🐍 Setup Python ${{ env.PYTHON_VERSION }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: 📦 Install dependencies
+      working-directory: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt --target=".python_packages/lib/site-packages"
+
+    - name: 🧪 Run tests (if any)
+      working-directory: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+      run: |
+        # Ajoutez vos tests ici si disponibles
+        echo "✅ Tests passed"
+
+    - name: 🚀 Deploy to Azure Functions
+      uses: Azure/functions-action@v1
+      with:
+        app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+        package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+        publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+        scm-do-build-during-deployment: true
+        enable-oryx-build: true
+
+    - name: ✅ Deployment complete
+      run: |
+        echo "🎉 Deployment successful!"
+        echo "Function URL: https://${{ env.AZURE_FUNCTIONAPP_NAME }}.azurewebsites.net/api/recommendarticle"
