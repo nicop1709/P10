@@ -39,14 +39,17 @@ jobs:
         # Ajoutez vos tests ici si disponibles
         echo "✅ Tests passed"
 
+    - name: 📦 Create deployment package
+      working-directory: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+      run: |
+        zip -r ../deployment.zip .
+
     - name: 🚀 Deploy to Azure Functions
       uses: Azure/functions-action@v1
       with:
         app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-        package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+        package: deployment.zip
         publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
-        scm-do-build-during-deployment: true
-        enable-oryx-build: true
 
     - name: ✅ Deployment complete
       run: |
