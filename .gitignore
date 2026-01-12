@@ -13,3 +13,4 @@ __pycache__
 *.env
 local.settings.json
 *.md
+!README.md
