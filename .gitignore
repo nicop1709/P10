@@ -12,3 +12,4 @@ __pycache__
 .azure_deploy_vars
 *.env
 local.settings.json
+*.md
