@@ -7,6 +7,7 @@ clicks
 __pycache__
 *.pyc
 *.model
+images/*
 
 # Azure deployment secrets
 .azure_deploy_vars

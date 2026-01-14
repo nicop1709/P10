@@ -14,6 +14,39 @@ AZURE_FUNCTION_URL = "https://func-recommender-1768155564.azurewebsites.net/api/
 # Récupérer la clé depuis les variables d'environnement
 AZURE_FUNCTION_KEY = os.environ.get('AZURE_FUNCTION_KEY')
 
+# Vérifier que la clé est définie
+if not AZURE_FUNCTION_KEY:
+    st.error("""
+    ⚠️ **Erreur de configuration : Clé API manquante**
+    
+    La variable d'environnement `AZURE_FUNCTION_KEY` n'est pas définie.
+    
+    **Pour résoudre ce problème :**
+    
+    1. **Option 1 - Utiliser le script automatique :**
+       ```bash
+       source ./set_api_key.sh
+       streamlit run app.py
+       ```
+    
+    2. **Option 2 - Définir manuellement :**
+       ```bash
+       export AZURE_FUNCTION_KEY='votre_cle'
+       streamlit run app.py
+       ```
+    
+    3. **Option 3 - Obtenir la clé depuis Azure :**
+       ```bash
+       az functionapp keys list \\
+         --name func-recommender-1768155564 \\
+         --resource-group rg-recommender \\
+         --query 'functionKeys.default' -o tsv
+       ```
+    
+    **Note :** Vous pouvez aussi utiliser `./run_app.sh` qui configure automatiquement la clé.
+    """)
+    st.stop()
+
 # Tarification Azure Functions (Consumption Plan - Pay-as-you-go)
 # Source: https://azure.microsoft.com/en-us/pricing/details/functions/
 COST_PER_EXECUTION = 0.20 / 1_000_000  # $0.20 per million executions
@@ -88,12 +121,7 @@ def get_recommendations(user_id):
 
     Returns:
         dict: Réponse de l'API ou None en cas d'erreur
-    """
-    if not AZURE_FUNCTION_KEY:
-        st.error("❌ Clé Azure Function non configurée. Définissez la variable d'environnement AZURE_FUNCTION_KEY.")
-        st.info("💡 Utilisez: `export AZURE_FUNCTION_KEY='votre_cle'` ou exécutez `source set_api_key.sh`")
-        return None
-    
+    """    
     try:
         # Mesurer le temps de réponse
         start_time = time.time()
