@@ -15,3 +15,5 @@ images/*
 local.settings.json
 *.md
 !README.md
+
+old/*

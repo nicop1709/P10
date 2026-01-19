@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Script de déploiement Azure étape par étape
+# Script de déploiement Azure étape par étape (généré en grande partie par Cursor AgentIA)
 # Guide interactif pour déployer le système de recommandation sur Azure Functions
 
 set -e  # Arrêter en cas d'erreur
-# Couleurs pour l'affichage
+# Couleurs pour l'affichage (Généré avec Cursor Agent)
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
