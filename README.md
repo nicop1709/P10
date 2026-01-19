@@ -346,18 +346,6 @@ Le système utilise Azure Functions en mode **Consumption (Serverless)**:
 - **10,000 requêtes/jour**: ~$0.86/mois
 - **100,000 requêtes/jour**: ~$67/mois
 
-Pour plus de détails, consultez [AZURE_COSTS.md](AZURE_COSTS.md).
-
-## Documentation Complémentaire
-
-Consultez les fichiers suivants pour plus de détails:
-
-- `AZURE_COSTS.md`: Analyse détaillée des coûts Azure
-- `DEPLOYMENT.md`: Guide de déploiement détaillé
-- `GUIDE_DEPLOIEMENT_AZURE.md`: Instructions Azure complètes
-- `SOLUTION_UNPICKLING_ERROR.md`: Résolution des erreurs pickle
-- `azure_function/README.md`: Documentation de l'Azure Function
-
 ## Technologies Utilisées
 
 - **Python 3.11**: Langage principal
@@ -375,7 +363,3 @@ Projet P10 - OpenClassrooms Ingénieur IA
 ## Licence
 
 Ce projet est développé dans le cadre d'une formation OpenClassrooms.
-
----
-
-**Note**: Remplacez `XXXXXXXXXX` par l'ID unique de votre Function App Azure dans les commandes ci-dessus.
