@@ -17,3 +17,6 @@ local.settings.json
 !README.md
 
 old/*
+
+streamlit_app/*
+streamlit_app/.env
