@@ -17,32 +17,38 @@ P10/
 ├── serialize_artifacts.py          # Sérialisation des modèles
 ├── requirements.txt                # Dépendances Python
 │
-├── notebooks/
-│   ├── Notebook_discover_data.ipynb       # Exploration des données
-│   └── Notebook_recommender_system.ipynb  # Training du modèle
+├── Notebook_discover_data.ipynb    # Exploration des données
+├── Notebook_recommender_system.ipynb  # Training du modèle
 │
 ├── azure_function/
 │   ├── RecommendArticle/
 │   │   ├── __init__.py            # Code de l'Azure Function
-│   │   └── function.json          # Configuration des bindings
+│   │   ├── function.json          # Configuration des bindings
+│   │   └── recommender.py         # Module Recommender pour Azure
 │   ├── host.json                  # Configuration globale
+│   ├── local.settings.json        # Paramètres locaux (dev)
 │   └── requirements.txt           # Dépendances Azure Function
 │
-├── scripts/
-│   ├── deploy_azure.sh            # Déploiement complet sur Azure
-│   ├── redeploy_function.sh       # Redéploiement de la fonction
-│   ├── reupload_models.sh         # Re-upload des modèles
-│   └── test_function.py           # Tests de l'API
+├── streamlit_app/                  # Application Streamlit (version séparée)
+│   ├── app.py                     # Application Streamlit
+│   ├── articles_metadata.csv      # Métadonnées (copie locale)
+│   ├── requirements.txt           # Dépendances Streamlit
+│   └── run_streamlit.sh           # Script de lancement
 │
-├── data/
-│   ├── clicks/                    # Données de clics (partitionnées)
-│   ├── clicks.csv                 # Dataset complet
-│   └── articles_metadata.csv      # Métadonnées des articles
+├── deploy_azure.sh                 # Déploiement complet sur Azure
+├── redeploy_function.sh            # Redéploiement de la fonction
+├── reupload_models.sh              # Re-upload des modèles
+├── test_function.py                # Tests de l'API
 │
-└── models/ (générés)
-    ├── als_model.pkl              # Modèle ALS entraîné
-    ├── metadata.pkl               # Métadonnées (mappings, etc.)
-    └── csr_train.pkl              # Matrice sparse CSR
+├── clicks/                         # Données de clics (partitionnées)
+├── clicks.csv                      # Dataset complet
+├── clicks_sample.csv               # Échantillon de données
+└── articles_metadata.csv           # Métadonnées des articles
+│
+└── Modèles (générés à la racine):
+    ├── als_model.pkl               # Modèle ALS entraîné
+    ├── metadata.pkl                # Métadonnées (mappings, etc.)
+    └── csr_train.pkl                # Matrice sparse CSR
 ```
 
 ## Installation
